@@ -38,7 +38,7 @@ The source data resides in S3 and needs to be processed in Sparkify's data wareh
 
 ## Airflow DAG
 
-<img src="images/dag.png" width="700" height = "400" align="center">
+<img src="images/dag.png" width="800" height = "500" align="center">
  * The stage operator is expected to be able to load any JSON formatted files from S3 to Amazon Redshift.
  * With dimension and fact operators, you can utilize the provided SQL helper class to run data transformations.
  * Data quality operator, is used to run checks on the data itself.
