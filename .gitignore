@@ -1,4 +1,7 @@
 logs/
 *.env
+*.DS_Store
 dags/__pycache__/
 plugins/__pycache__/
+plugins/operators/__pycache__/
+plugins/helpers/__pycache__/
