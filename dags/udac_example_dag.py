@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 import os
+from pickle import TRUE
 from airflow import DAG
 from airflow.operators.dummy_operator import DummyOperator
 from operators import (StageToRedshiftOperator, LoadFactOperator,
@@ -67,6 +68,7 @@ load_user_dimension_table = LoadDimensionOperator(
     task_id            = 'Load_user_dim_table'        ,
     postgres_conn_id   = "redshift"                   ,
     dim_table          = "dim_users"                  ,
+    truncate_table     = True                         ,
     sql_query          = SqlQueries.user_table_insert ,
     dag=dag
 
@@ -77,6 +79,7 @@ load_song_dimension_table = LoadDimensionOperator(
     task_id            = 'Load_song_dim_table'        ,
     postgres_conn_id   = "redshift"                   ,
     dim_table          = "dim_songs"                  ,
+    truncate_table     = True                         ,
     sql_query          = SqlQueries.song_table_insert ,
     dag=dag
 )
@@ -85,6 +88,7 @@ load_artist_dimension_table = LoadDimensionOperator(
     task_id            = 'Load_artist_dim_table'      ,
     postgres_conn_id   = "redshift"                   ,
     dim_table          = "dim_artists"                ,
+    truncate_table     = True                         ,
     sql_query          = SqlQueries.artist_table_insert,
     dag=dag
 )
@@ -93,6 +97,7 @@ load_time_dimension_table = LoadDimensionOperator(
     task_id            = 'Load_time_dim_table'        ,
     postgres_conn_id   = "redshift"                   ,
     dim_table          = "dim_time"                   ,
+    truncate_table     = True                         ,
     sql_query          =  SqlQueries.time_table_insert,
     dag=dag
 )
