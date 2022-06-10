@@ -102,11 +102,15 @@ load_time_dimension_table = LoadDimensionOperator(
     dag=dag
 )
 
-
+dq_checks=[
+{'check_sql':"SELECT count(*) FROM dim_users WHERE user_id is null", 'expected_result': 0},
+{'check_sql':"SELECT count(*) FROM dim_songs WHERE song_id is null", 'expected_result': 0},
+{'check_sql':"SELECT count(*) FROM dim_artists WHERE artist_id is null", 'expected_result': 0}
+]
 run_quality_checks = DataQualityOperator(
     task_id='Run_data_quality_checks'                ,
     postgres_conn_id   = "redshift"                  ,
-    tables_quality = ["fact_songplays","dim_users","dim_songs","dim_artists","dim_time" ],
+    dq_checks = dq_checks,
     dag=dag
 )
 
